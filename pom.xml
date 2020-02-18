@@ -17,6 +17,11 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Hoxton.SR1</spring-cloud.version>
+		<spring.boot.thymeleaf.version>2.1.8.RELEASE</spring.boot.thymeleaf.version>
+		<model-mapper.version>2.3.0</model-mapper.version>
+		<lombok.version>1.18.10</lombok.version>
+		<h2database.version>1.4.190</h2database.version>
+
 	</properties>
 
 	<dependencies>
@@ -33,6 +38,12 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<version>${spring.boot.thymeleaf.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
@@ -48,6 +59,26 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>${model-mapper.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+			<version>${h2database.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>
