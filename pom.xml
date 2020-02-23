@@ -12,15 +12,17 @@
 	<artifactId>overtimes-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>overtimes-service</name>
-	<description>Demo project for Spring Boot</description>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Hoxton.SR1</spring-cloud.version>
 		<spring.boot.thymeleaf.version>2.1.8.RELEASE</spring.boot.thymeleaf.version>
 		<model-mapper.version>2.3.0</model-mapper.version>
 		<lombok.version>1.18.10</lombok.version>
 		<h2database.version>1.4.190</h2database.version>
+		<postgresql.version>42.2.0.jre7</postgresql.version>
+		<logback.spring.boot.version>2.7.1</logback.spring.boot.version>
 
 	</properties>
 
@@ -77,6 +79,18 @@
 			<artifactId>h2</artifactId>
 			<scope>test</scope>
 			<version>${h2database.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.rakugakibox.spring.boot</groupId>
+			<artifactId>logback-access-spring-boot-starter</artifactId>
+			<version>${logback.spring.boot.version}</version>
 		</dependency>
 
 	</dependencies>

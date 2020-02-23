@@ -16,10 +16,17 @@ eureka:         #tells about the Eureka server details and its refresh time
 spring:
   application:
     name: overtimes-service   #current service name to be used by the eureka server
-
-#management:
-#  security:
-#    enabled: false  #disable the spring security on the management endpoints like /env, /refresh etc.
+  datasource:
+    url: jdbc:postgresql://localhost:5432/overtimes
+    username: docker
+    password: docker
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        format_sql: true
 
 logging:
   level:
