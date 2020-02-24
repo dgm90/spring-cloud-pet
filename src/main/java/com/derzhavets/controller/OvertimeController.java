@@ -39,7 +39,7 @@ public class OvertimeController {
                 bonusServiceFeignClient.caculateAndSaveBonusForOvertime(overtimeCreated);
 
         if (createBonusResponse.getStatusCode() != HttpStatus.OK) {
-            log.info("Unable to save bonus for overtime.");
+            log.debug("Unable to save bonus for overtime.");
         }
 
 
