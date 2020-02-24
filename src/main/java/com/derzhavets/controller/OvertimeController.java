@@ -1,8 +1,12 @@
 package com.derzhavets.controller;
 
 import com.derzhavets.controller.model.Overtime;
+import com.derzhavets.service.BonusServiceFeignClient;
 import com.derzhavets.service.OvertimeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,11 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping(value = "overtimes")
 public class OvertimeController {
 
     private OvertimeService overtimeService;
+
+    @Autowired
+    private BonusServiceFeignClient bonusServiceFeignClient;
 
     @Autowired
     public OvertimeController(OvertimeService overtimeService) {
@@ -24,7 +32,18 @@ public class OvertimeController {
 
     @RequestMapping(path = "", method = RequestMethod.POST, consumes = {"application/json"})
     public Overtime createOvertime(@RequestBody Overtime overtime) {
-        return overtimeService.createOvertime(overtime);
+        Overtime overtimeCreated = overtimeService.createOvertime(overtime);
+
+        //calculate and save bonus
+        ResponseEntity<String> createBonusResponse =
+                bonusServiceFeignClient.caculateAndSaveBonusForOvertime(overtimeCreated);
+
+        if (createBonusResponse.getStatusCode() != HttpStatus.OK) {
+            log.info("Unable to save bonus for overtime.");
+        }
+
+
+        return overtimeCreated;
     }
 
     @RequestMapping(path = "", method = RequestMethod.GET)

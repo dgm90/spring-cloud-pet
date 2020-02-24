@@ -1,7 +1,6 @@
 server:
-  port: 8098    #default port where the service will be started
-
-eureka:         #tells about the Eureka server details and its refresh time
+  port: 8098
+eureka:
   instance:
     leaseRenewalIntervalInSeconds: 1
     leaseExpirationDurationInSeconds: 2
@@ -15,7 +14,7 @@ eureka:         #tells about the Eureka server details and its refresh time
 
 spring:
   application:
-    name: overtimes-service   #current service name to be used by the eureka server
+    name: overtimes-service
   datasource:
     url: jdbc:postgresql://localhost:5432/overtimes
     username: docker
@@ -31,3 +30,11 @@ spring:
 logging:
   level:
     com.derzhavets: DEBUG
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic

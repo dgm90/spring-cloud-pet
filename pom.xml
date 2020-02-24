@@ -23,7 +23,7 @@
 		<h2database.version>1.4.190</h2database.version>
 		<postgresql.version>42.2.0.jre7</postgresql.version>
 		<logback.spring.boot.version>2.7.1</logback.spring.boot.version>
-
+		<srping.cloud.starter.feign.version>1.4.7.RELEASE</srping.cloud.starter.feign.version>
 	</properties>
 
 	<dependencies>
@@ -63,6 +63,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-feign</artifactId>
+			<version>${srping.cloud.starter.feign.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
 			<version>${model-mapper.version}</version>
@@ -85,12 +91,6 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>${postgresql.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>net.rakugakibox.spring.boot</groupId>
-			<artifactId>logback-access-spring-boot-starter</artifactId>
-			<version>${logback.spring.boot.version}</version>
 		</dependency>
 
 	</dependencies>
