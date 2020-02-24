@@ -27,7 +27,7 @@ public class BonusController {
             String message = String.format("Unable to calculate the bonus. There is no rate for projectId: [%s]",
                     overtime.getProjectId());
             log.debug(message);
-            return new ResponseEntity<String>(message, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
         }
 
         Bonus bonus = bonusService.calculateAndSaveBonus(rate, overtime);
@@ -39,7 +39,7 @@ public class BonusController {
         Bonus bonus = bonusService.findBonusByOvertimeId(overtimeId);
 
         if (bonus == null) {
-            return new ResponseEntity<String>(String.format("There is no rate for overtimeId: []", overtimeId),
+            return new ResponseEntity<>(String.format("There is no rate for overtimeId: []", overtimeId),
                     HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(bonus.getBonus().toString(), HttpStatus.OK);
