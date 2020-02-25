@@ -12,14 +12,19 @@ eureka:
       enabled: true
     lease:
       duration: 5
+    fetch-registry: true
 
 spring:
   application:
     name: bonus-service    #service name
   data:
     mongodb:
-      uri: mongodb://localhost:27017/bonusDBw
-
+      uri: mongodb://localhost:27017/bonusDB
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: overtimes
 logging:
   level:
     com.derzhavets: DEBUG
