@@ -12,9 +12,10 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableFeignClients
+@EnableBinding(Sink.class)
 @Import(OvertimesServiceConfiguration.class)
 public class OvertimesServiceApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(OvertimesServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(OvertimesServiceApplication.class, args);
+    }
 }

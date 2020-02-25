@@ -27,7 +27,16 @@ spring:
           lob:
             non_contextual_creation: true
         format_sql: true
-
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: overtimes
 logging:
   level:
     com.derzhavets: DEBUG
