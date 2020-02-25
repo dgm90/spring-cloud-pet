@@ -36,7 +36,7 @@ public class OvertimeController {
 
         //calculate and save bonus
         ResponseEntity<String> createBonusResponse =
-                bonusServiceFeignClient.caculateAndSaveBonusForOvertime(overtimeCreated);
+                bonusServiceFeignClient.sendCalculateAndSaveBonusForOvertime(overtimeCreated);
 
         if (createBonusResponse.getStatusCode() != HttpStatus.OK) {
             log.debug("Unable to save bonus for overtime.");

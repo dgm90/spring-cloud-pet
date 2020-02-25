@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public interface BonusServiceFeignClient {
 
     @RequestMapping(method = {RequestMethod.POST}, value = {"/bonus/calculateBonusForOvertime"})
-    public ResponseEntity<String> caculateAndSaveBonusForOvertime(Overtime overtime);
+    public ResponseEntity<String> sendCalculateAndSaveBonusForOvertime(Overtime overtime);
 }
