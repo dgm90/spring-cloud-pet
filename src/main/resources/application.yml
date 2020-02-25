@@ -11,6 +11,7 @@ eureka:
       enabled: true
     lease:
       duration: 5
+    fetch-registry: true
 
 spring:
   application:

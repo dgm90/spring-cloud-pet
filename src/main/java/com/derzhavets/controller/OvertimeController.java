@@ -42,7 +42,6 @@ public class OvertimeController {
             log.debug("Unable to save bonus for overtime.");
         }
 
-
         return overtimeCreated;
     }
 
