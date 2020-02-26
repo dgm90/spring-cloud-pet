@@ -1,5 +1,5 @@
 server:
-  port: ${PORT:8761} # Indicate the default PORT where this service will be started
+  port: 8761
 
 eureka:
   client:
@@ -7,3 +7,7 @@ eureka:
     fetchRegistry: false
   server:
     waitTimeInMsWhenSyncEmpty: 0    #wait time for subsequent sync
+
+spring:
+  application:
+    name: eureka
