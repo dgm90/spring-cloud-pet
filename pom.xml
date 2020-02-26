@@ -24,6 +24,7 @@
 		<postgresql.version>42.2.0.jre7</postgresql.version>
 		<logback.spring.boot.version>2.7.1</logback.spring.boot.version>
 		<srping.cloud.starter.feign.version>1.4.7.RELEASE</srping.cloud.starter.feign.version>
+		<flyway.version>6.2.4</flyway.version>
 	</properties>
 
 	<dependencies>
@@ -96,6 +97,12 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>${flyway.version}</version>
 		</dependency>
 	</dependencies>
 

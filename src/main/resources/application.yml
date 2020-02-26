@@ -37,6 +37,7 @@ spring:
       bindings:
         input:
           destination: overtimes
+
 logging:
   level:
     com.derzhavets: DEBUG

@@ -1,5 +1,3 @@
-CREATE DATABASE overtimes;
-
 CREATE TABLE employee (
 	"id" serial PRIMARY KEY,
     "first_name" varchar NOT NULL,
