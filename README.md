@@ -19,11 +19,18 @@ For building and running the application you need:
 - [Maven 3](https://maven.apache.org)
 - [Docker](https://www.docker.com/)
 
-## Running the application locally
+## Running the application
 
-All applications are supposed to be run together and simultaneously, but you can also run each separately.
+All applications are supposed to be run together and simultaneously using Docker Compose, but you can also run each
+ separately.
 Please check the readme files for each project:
 - [Eureka-server](https://github.com/dgm90/spring-cloud-pet/blob/master/bonus-service/README.md)
 - [Overtimes-service](https://github.com/dgm90/spring-cloud-pet/blob/master/overtimes-service/README.md)
 - [Bonus-service](https://github.com/dgm90/spring-cloud-pet/blob/master/eureka-server/README.md)
 
+### How to run in Docker compose
+Make sure you are in the root folder with a docker-compose.yml.
+Run command:
+```
+docker-compose up
+```
