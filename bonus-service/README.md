@@ -20,13 +20,25 @@ mvn spring-boot:run
 ```
 
 ## Running in docker
-
 You will need Docker installed and running.
-1. To build a docker image image run:
+
+#### Before running the app:
+Run mongoDB:
+```
+docker run --rm --name mongo -d -p 27017:27017 mongo
+```
+Run rabbitMq:
+```
+docker run -d --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+```
+
+#### To run the app:
+
+1. Build a docker image:
 ```
 docker build -t bonus-service . 
 ```
-2. To run container:
+2. Run app in container:
 ```
 docker run --rm --name bonus-service -d -p 9098:9098 bonus-service
 ```
