@@ -1,1 +1,89 @@
 version: '3.7'
+services:
+  eureka-server:
+    image: eureka
+    container_name: eureka-container
+    build:
+      context: ./eureka-server
+      dockerfile: Dockerfile
+    ports:
+      - 8761:8761
+    networks:
+      - overtimes-network
+
+  overtimes-service:
+    image: overtimes
+    container_name: overtimes-container
+    build:
+      context: ./overtimes-service
+      dockerfile: Dockerfile
+    depends_on:
+      - postgresdb
+      - eureka-server
+      - rabbit-mq
+    ports:
+      - 8098:8098
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-container:5432/overtimes
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-container:8761/eureka/
+      SPRING_RABBITMQ_HOST: rabbit-mq
+    networks:
+      - overtimes-network
+
+  bonus-service:
+    image: bonus
+    container_name: bonus-container
+    build:
+      context: ./bonus-service
+      dockerfile: Dockerfile
+    depends_on:
+      - mongodb
+      - eureka-server
+      - rabbit-mq
+    ports:
+      - 9098:9098
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongo-container:27017/bonusDB
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-container:8761/eureka/
+      SPRING_RABBITMQ_HOST: rabbit-mq
+    networks:
+      - overtimes-network
+
+  postgresdb:
+    image: postgres
+    container_name: postgres-container
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: overtimes
+    restart: always
+    networks:
+      - overtimes-network
+
+  rabbit-mq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-container
+    hostname: rabbit
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - overtimes-network
+
+  mongodb:
+    image: mongo
+    container_name: mongo-container
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_DATABASE=bonusDB
+    volumes:
+      - ./bonus-service/src/main/resources/mongoDB/data.js:/docker-entrypoint-initdb.d/data.js:ro
+    networks:
+      - overtimes-network
+
+networks:
+  overtimes-network:
+    name: overtimes-network

@@ -29,6 +29,14 @@ Please check the readme files for each project:
 - [Bonus-service](https://github.com/dgm90/spring-cloud-pet/blob/master/eureka-server/README.md)
 
 ### How to run in Docker compose
+You need the following docker images build in your host computer:
+1. eureka-server
+2. overtimes-service
+3. bonus-service
+4. postgresql
+5. mongodb
+6. rabbitmq
+
 Make sure you are in the root folder with a docker-compose.yml.
 Run command:
 ```
