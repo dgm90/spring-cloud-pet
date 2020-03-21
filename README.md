@@ -41,3 +41,45 @@ docker-compose up
 ```
 
 This will build and run images for all three microservices as well as databases and RabbitMq 
+
+
+### To test the app running:
+
+##### To check Eureka is running:
+Open http://localhost:8761/ in browser. Under 'Instances currently registered with Eureka' there should be 2
+  services registered: BONUS-SEVICE and OVERTIMES-SERVICE
+  
+#### To check Overtimes-service is running:
+```
+curl --location --request GET 'http://localhost:8098/employees/3'
+```
+An employee should be returned as JSON
+{"id":3,"firstName":"Petr","lastName":"Petrov"}
+
+#### To check Bonus-service is running:
+```
+curl --location --request POST 'http://localhost:9098/bonus/calculateBonusForOvertime' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "id": 5,
+    "projectId": 3,
+    "hours": 100.0
+}'
+```
+A bonus should be returned as text: 35000.0
+
+#### To test all apps interacting, create an overtime:
+```
+curl --location --request POST 'http://localhost:8098/overtimes' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+	"employeeId": 3,
+	"projectId": 3,
+	"startDate": "2011-12-31",
+	"hours": 100
+}'
+```
+A created overtime should be returned as JSON
+{"id":6,"employeeId":3,"projectId":3,"startDate":"2011-12-31T00:00:00.000+0000","hours":100.0}
+
+A message is sent from bonus-service to overtimes-service via RabbitMq. Open your terminal and look for com.derzhavets.rabbit.RabbitMqListener log to test RabbitMq messa
