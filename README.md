@@ -82,4 +82,13 @@ curl --location --request POST 'http://localhost:8098/overtimes' \
 A created overtime should be returned as JSON
 {"id":6,"employeeId":3,"projectId":3,"startDate":"2011-12-31T00:00:00.000+0000","hours":100.0}
 
-A message is sent from bonus-service to overtimes-service via RabbitMq. Open your terminal and look for com.derzhavets.rabbit.RabbitMqListener log to test RabbitMq messa
+##### What is happening:
+1. POST request goes to overtimes service
+2. Overtimes creates an overtime record in its database (Postgresql)
+3. Overtimes service sends a POST request to bonus-service by its domain name via Eureka Server
+4. Bonus-service accepts POST request, calculates bonus and creates a record in its database (MongoDB)
+5. Bonus-service sends a message to overtimes-service via RabbitMq. The message contains a newly created bonus record
+6. Overtimes-services accepts the messages and logs it
+
+To see the message open your terminal where docker-compose is up and look for com.derzhavets.rabbit.RabbitMqListener
+ log record like ```New incoming message: [{"message":"A new bonus record is saved with id...```
